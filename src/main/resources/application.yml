@@ -45,10 +45,10 @@ langchain4j:
       log-requests: true
       log-responses: true
       response-format: json_object
-      api-key: sk-efa8ced4b5564162a0a05913c35f6ebd
+      api-key: <api-key>
     streaming-chat-model:
       base-url: https://api.deepseek.com
-      api-key: sk-efa8ced4b5564162a0a05913c35f6ebd
+      api-key: <api-key>
       model-name: deepseek-chat
       max-tokens: 8192
       log-requests: true
