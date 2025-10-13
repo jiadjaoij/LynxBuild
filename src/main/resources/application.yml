@@ -13,6 +13,7 @@ spring:
       host: localhost
       port: 6379
       ttl: 3600
+      database: 0
   session:
     store-type: redis
     timeout: 259200
@@ -68,5 +69,10 @@ langchain4j:
       model-name: deepseek-chat
       log-requests: true
       log-responses: true
+minio:
+  endpoint: http://119.45.112.127:19000
+  access-key: minio
+  secret-key: 050312hz
+  bucket-name: yuai
 
 
