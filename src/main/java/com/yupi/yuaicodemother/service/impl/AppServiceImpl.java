@@ -5,6 +5,7 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
+import com.esotericsoftware.minlog.Log;
 import com.mybatisflex.core.query.QueryWrapper;
 import com.mybatisflex.spring.service.impl.ServiceImpl;
 import com.yupi.yuaicodemother.ai.AiCodeGenTypeRoutingService;
@@ -210,24 +211,30 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App>  implements AppS
         // 9. 返回可访问的 URL
         // 10. 构建应用访问 URL
         String appDeployUrl = String.format("%s/%s/", AppConstant.CODE_DEPLOY_HOST, deployKey);
+        log.info("开始生成应用封面，应用Id为：{}", appId);
 // 11. 异步生成截图并更新应用封面
         generateAppScreenshotAsync(appId, appDeployUrl);
         return appDeployUrl;
-
     }
 
     @Override
     public boolean removeById(Serializable id) {
-        if(id == null){
+        // 1. 获取应用信息
+        if(id == null) {
             return false;
         }
         Long appId = Long.valueOf(id.toString());
-        try {
-            chatHistoryService.deleteByAppId(appId);
-        }catch(Exception e){
-            log.error(e.getMessage(),"删除失败的原因");
+        if(appId <= 0) {
+            return false;
         }
-        return removeById(id);
+        try {
+            // 删除应用的同时也应该删除关联的聊天记录和作品
+            chatHistoryService.deleteByAppId(appId);
+
+        } catch (Exception e) {
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "删除应用失败：" + e.getMessage());
+        }
+        return super.removeById(id);
     }
 
     /**
@@ -246,6 +253,7 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App>  implements AppS
                 updateApp.setId(appId);
                 updateApp.setCover(screenshotUrl);
                 boolean updated = this.updateById(updateApp);
+                log.info("生成封面成功,封面截图为：{}",screenshotUrl);
                 ThrowUtils.throwIf(!updated, ErrorCode.OPERATION_ERROR, "更新应用封面失败");
             }
             catch (Exception e){
@@ -267,8 +275,6 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App>  implements AppS
         app.setUserId(loginUser.getId());
         // 应用名称暂时为 initPrompt 前 12 位
         app.setAppName(initPrompt.substring(0, Math.min(initPrompt.length(), 12)));
-//        // 使用 AI 智能选择代码生成类型
-//        CodeGenTypeEnum selectedCodeGenType = aiCodeGenTypeRoutingService.routeCodeGenType(initPrompt);
         AiCodeGenTypeRoutingService routingService = aiCodeGenTypeRoutingServiceFactory.createAiCodeGenTypeRoutingService();
         CodeGenTypeEnum selectedCodeGenType = routingService.routeCodeGenType(initPrompt);
         app.setCodeGenType(selectedCodeGenType.getValue());
