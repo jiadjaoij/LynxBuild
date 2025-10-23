@@ -1,10 +1,8 @@
 # 灵犀易建 开源项目
 壹句建站 **地址**：http://www.jiadjaoij.online/
-<img width="1890" height="880" alt="image" src="https://github.com/user-attachments/assets/0966cdf8-69b6-476c-8390-a5bce867dd98" />
-<img width="1895" height="875" alt="image" src="https://github.com/user-attachments/assets/e6511f46-c373-4080-8be5-6ecb3616416e" />
+## 项目简介<img width="1869" height="924" alt="23c38e89eed620d8a1f18103ed6a10f5" src="https://github.com/user-attachments/assets/d3b06302-057d-4a18-a00e-919efcd9dfb6" />
+<img width="1841" height="924" alt="7110c068436bd71366295901a2d342ee" src="https://github.com/user-attachments/assets/046bc1e4-4fa5-4031-b560-8621ef24ab3a" />
 
-
-## 项目简介
 
 `灵犀易建` 是一个基于 Java 的开源项目，旨在通过 AI 技术实现代码的自动化生成。该项目结合了 AI 模型与代码解析、保存、构建等模块，能够根据用户输入的自然语言描述生成 HTML、CSS、JavaScript 等多种类型的代码文件，并支持构建 Vue 项目。
 
@@ -175,6 +173,7 @@ GET /static/{deployKey}/**
 - [MyBatis Plus](https://mp.baomidou.com/)
 - [Redisson](https://github.com/redisson/redisson)
 - [MinIO Java SDK](https://github.com/minio/minio-java)
+
 
 
 ---
