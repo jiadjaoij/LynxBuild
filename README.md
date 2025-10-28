@@ -1,5 +1,5 @@
 # 灵犀易建 开源项目
-壹句建站 **地址**：http://www.jiadjaoij.online/
+灵犀易建 **地址**：http://www.jiadjaoij.online/
 ## 项目简介<img width="1869" height="924" alt="23c38e89eed620d8a1f18103ed6a10f5" src="https://github.com/user-attachments/assets/d3b06302-057d-4a18-a00e-919efcd9dfb6" />
 <img width="1841" height="924" alt="7110c068436bd71366295901a2d342ee" src="https://github.com/user-attachments/assets/046bc1e4-4fa5-4031-b560-8621ef24ab3a" />
 
@@ -177,3 +177,4 @@ GET /static/{deployKey}/**
 
 
 ---
+
